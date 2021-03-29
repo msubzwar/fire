@@ -46,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Color(0xFFBA0167),
         title: Text(widget.title),
       ),
-      drawer: navbar(),
+      endDrawer: navbar(),
 
       body: Container(
         decoration: BoxDecoration(
@@ -55,7 +55,9 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
 
-        child: GridView.count(
+
+        child:
+        GridView.count(
           crossAxisCount: 2,
           children: List.generate(
             items.length, (index) => Center(
@@ -68,7 +70,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         builder: (context) => SecondPage(
                           text: items[index].getName(),
                           imglnk: items[index].imglink,
-                        )),
+                        ),
+                    ),
                   );
                 },
                 child: Container(
@@ -101,8 +104,8 @@ class _MyHomePageState extends State<MyHomePage> {
               //
             ),
           ),
+          ),
         ),
-      ),
     );
   }
 }

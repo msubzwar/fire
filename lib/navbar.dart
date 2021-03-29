@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notification/check.dart';
 
 class navbar extends StatelessWidget{
 
@@ -31,8 +32,17 @@ class navbar extends StatelessWidget{
           ),
           ListTile(
             leading: Icon(Icons.settings),
-            title: Text("Setting"),
-            onTap: ()=>null,
+            title: Text("Buildings"),
+            onTap: (){
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Check(
+
+                  ),
+                ),
+              );
+            },
           ),
         ],
       )

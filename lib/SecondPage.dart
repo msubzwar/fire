@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:notification/model/alerts.dart';
 import 'package:notification/navbar.dart';
 
 
@@ -38,14 +39,14 @@ class ActionPage extends StatefulWidget {
 class _ActionPageState extends State<ActionPage> {
   final String text;
   final String imglink;
-  int $radio =  0;
-  String valueChoose;
-  String floorChoose;
+  int $radio =  1;
   List building=[
     "Al-Sadd",
     "Wakrah",
     "Souq Waqif",
   ];
+  String valueChoose = "Al-Sadd";
+  String floorChoose = "1";
   _ActionPageState(this.text,this.imglink);
 
   @override
@@ -67,7 +68,7 @@ setSelectRadio(int val){
 
   @override
   Widget build(BuildContext context) {
-    CollectionReference buildings = FirebaseFirestore.instance.collection("event");
+    CollectionReference buildings = FirebaseFirestore.instance.collection("Building");
 
     return Scaffold(
 
@@ -203,33 +204,20 @@ setSelectRadio(int val){
                       height: 40.0,
                       width: 100.0,
                     ),
-                    StreamBuilder<QuerySnapshot>(
-                      stream: buildings.snapshots(),
-                      builder: (BuildContext context,
-                          AsyncSnapshot<QuerySnapshot> snapshot) {
-                        if (!snapshot.hasData) {
-                          // ignore: missing_return
-                          print('test phrase');
-                          // ignore: missing_return, missing_return
-                          return Text("Data Not Found");
-                        } else {
-                          List<DropdownMenuItem> building = [];
-                          for (int i = 0; i < snapshot.data.docs.length; i++) {
-                            print(i);
-                            DocumentSnapshot snap = snapshot.data.docs[i];
-                            print(snapshot.data.toString());
-                            building.add(
-                              DropdownMenuItem(
-                                child: Text(
-                                  snap.id,
-                                  style: TextStyle(color: Colors.red),
-                                ),
-                              ),
-                            );
-                          } // for loop
-                        } // else
-                      },
-                    ),
+                    // StreamBuilder(
+                    //     stream: buildings.snapshots(),
+                    //     builder: (context, snapshot) {
+                    //         width: 150,
+                    //         color: Theme.of(context).primaryColor,
+                    //           child: new DropdownButton(
+                    //           items:  snapshot.data.map<DropdownMenuItem<String>>((value) =>
+                    //           new DropdownMenuItem<String>(
+                    //             value: value["distance"],
+                    //             child: new Text(value["distance"]),
+                    //           )
+                    //           ).
+                    //         ),
+                    //     }),
                     Container(
                       width: 250,
                       height: 50,
@@ -245,6 +233,8 @@ setSelectRadio(int val){
                         List<String> ret = [
                           this.text, $choice,valueChoose
                         ];
+                        Alerts addAlert = new Alerts(this.text,$choice,valueChoose);
+                        addAlert.addAlert();
                         print(ret.toString());
                       },
                       child: Text("Send Alert",
