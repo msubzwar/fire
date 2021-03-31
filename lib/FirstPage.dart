@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:notification/navbar.dart';
 
@@ -7,21 +6,21 @@ import 'SecondPage.dart';
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
+ 
   Widget build(BuildContext context) {
+  
     return MaterialApp(
       title: 'Business Crisis Management System',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Business Crisis Management System'),
+      home: MyHomePage(title: 'Business Crisis Management System',),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
-
-
 
   final String title;
 
@@ -50,27 +49,26 @@ class _MyHomePageState extends State<MyHomePage> {
 
       body: Container(
         decoration: BoxDecoration(
-          image: DecorationImage(image: AssetImage("images/bg.jpeg"),
-          fit: BoxFit.cover,
+          image: DecorationImage(
+            image: AssetImage("images/bg.jpeg"),
+            fit: BoxFit.cover,
           ),
         ),
-
-
-        child:
-        GridView.count(
+        child: GridView.count(
           crossAxisCount: 2,
           children: List.generate(
-            items.length, (index) => Center(
+            items.length,
+            (index) => Center(
               child: GestureDetector(
                 onTap: () {
                   print(items[index].getName());
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => SecondPage(
-                          text: items[index].getName(),
-                          imglnk: items[index].imglink,
-                        ),
+                      builder: (context) => SecondPage(
+                        text: items[index].getName(),
+                        imglnk: items[index].imglink,
+                      ),
                     ),
                   );
                 },
@@ -78,17 +76,17 @@ class _MyHomePageState extends State<MyHomePage> {
                   margin: EdgeInsets.all(10.0),
                   child: GridTile(
                     child: new Card(
-                        elevation: 10,
-                        color: Colors.white,
-                        child: Container(
-                          decoration: BoxDecoration(
+                      elevation: 10,
+                      color: Colors.white,
+                      child: Container(
+                        decoration: BoxDecoration(
                           image: DecorationImage(
                             image: AssetImage(items[index].imglink),
                             fit: BoxFit.scaleDown,
                             scale: 5,
                           ),
                         ),
-                    ),
+                      ),
                     ),
                     footer: Center(
                       child: Text(
@@ -104,8 +102,8 @@ class _MyHomePageState extends State<MyHomePage> {
               //
             ),
           ),
-          ),
         ),
+      ),
     );
   }
 }
